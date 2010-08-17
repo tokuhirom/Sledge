@@ -26,12 +26,14 @@ sub import {
 
 sub new {
     my($class, $file, $page) = @_;
+    my $tmpl_encoding = eval { $page->create_config->tmpl_encoding };
     bless {
 	_options => {
 	    filename => $file,
 	    ABSOLUTE => 1,
 	    RELATIVE => 1,
 	    INCLUDE_PATH => [ $page->create_config->tmpl_path, '.' ],
+        ( $tmpl_encoding ? (ENCODING => $tmpl_encoding) : () ),
 	},
 	_params  => {
 	    config  => $page->create_config,

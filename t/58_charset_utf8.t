@@ -18,8 +18,9 @@ sub create_charset {
 
 sub dispatch_unicode { }
 
-use vars qw($TMPL_PATH);
+use vars qw($TMPL_PATH $TMPL_ENCODING);
 $TMPL_PATH = "t/template";
+$TMPL_ENCODING = 'utf-8';
 
 package main;
 
