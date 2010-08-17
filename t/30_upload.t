@@ -12,6 +12,7 @@ use FileHandle;
 use HTTP::Request::Common;
 use IO::Scalar;
 use Sledge::Request::CGI;
+use File::Temp qw/tempdir/;
 
 # simulates file upload
 my $req = POST '/foo.cgi',
@@ -68,8 +69,9 @@ my $r = Sledge::Request::CGI->new($q);
     my $match = $ENV{TMPDIR} || '/tmp/';
     like $upload->tempname, qr|$match|o;
 
-    my $tmpfile = 't/.tmp';
-    $upload->link($tmpfile);
+    my $tmpdir = tempdir(CLEANUP => 1);
+    my $tmpfile = "$tmpdir/.tmp";
+    ok $upload->link($tmpfile), 'link';
     ok -e $tmpfile;
     is catfile($tmpfile), "hoge\nbar\n";
     unlink $tmpfile;
