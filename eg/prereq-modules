@@ -1,5 +1,4 @@
-Apache::Request
-Apache::Reload
+Plack 0.9944
 CGI 2.47
 Test::Inline
 Carp::Assert

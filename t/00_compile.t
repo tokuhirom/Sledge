@@ -20,6 +20,7 @@ sub wanted {
 	my $module = $File::Find::name;
 	$module =~ s@^lib/(.*)\.pm$@$1@;
 	$module =~ s@/@::@g;
+    next if $module eq 'Sledge::Pages::Apache';
 	push @mod, $module;
     }
 }
